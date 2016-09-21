@@ -1,17 +1,14 @@
 <?php
-$a = $_REQUEST["a"];
-$b = $_REQUEST["b"];
-$radio = $_REQUEST["operator"];
+ob_end_flush();
+ob_start();
+echo 'Anna';
+$out1=ob_get_contents();
+echo 'Hello';
+$out2=ob_get_contents();
+ob_clean();
 
-var_dump($_REQUEST);
-switch ($radio) {
-    case '+':
-        echo $a + $b;
-    break;
-    case '-':
-        echo $a - $b;
-    break;
-    case '/':
-        echo $a / $b;
-    break;
+
+
+
+
 }
