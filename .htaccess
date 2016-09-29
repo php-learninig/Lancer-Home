@@ -1,2 +1,2 @@
 Options -Indexes +FollowSymLinks
-DirectoryIndex constructions.php
+DirectoryIndex string.php
