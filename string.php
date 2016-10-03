@@ -30,7 +30,7 @@ function echoThree()
  *
  */
 
-function bilet()
+/*function bilet()
 {
     return random_int(100000, 999999);
 }
@@ -59,12 +59,79 @@ $bilet = funBilet();
 
 while(!$bilet)
 {
-
     if(!$bilet){
-        echo 'Билет дерьмовенький', PHP_EOL;
+        echo $bilet, ' - Билет дерьмовенький', PHP_EOL;
     }
 
     $bilet = funBilet();
 }
 
 echo "$bilet - Билет счачтливый", PHP_EOL;
+*/
+
+/**
+ * @param int    $x
+ * @param int    $y
+ * @param string $math
+ */
+function calc($x, $y, $math)
+{
+    /*    switch($math) {
+            case '+':
+                return $x + $y;
+            break;
+
+            case '-':
+                return $x - $y;
+            break;
+
+            case '*':
+                return $x * $y;
+            break;
+
+            case '/':
+                return $x / $y;
+            break;
+        }*/
+
+    if(
+        !is_numeric($x)
+        && !is_numeric($y)
+        && $y !== 0
+    ){
+        return 'это не число !';
+    }
+
+
+    if($math === '+') {
+        return $x + $y;
+    }
+    elseif($math === '-') {
+        return $x - $y;
+    }
+    elseif($math === '*'){
+        return $x * $y;
+    }
+    elseif($math === '/'){
+        if($y === 0 ){
+            return 'Error';
+        }
+
+        return $x / $y;
+    }
+    else {
+        return 'Osibka';
+    }
+}
+
+echo calc('fr5', 5, '/');
+
+/*
+ * 1. Создаем новую функцию
+ * 2.
+ *
+ * if(условие){действие}            если...
+ * ifelse(условие){действие}        В противном случае если...
+ *   else{действие}                 В противном случае...
+ */
+
