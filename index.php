@@ -1,9 +1,9 @@
 <?php
 //Ustanovka
 setlocale(LC_ALL,"russian");
-$day = striftime("%d");
-$mon = striftime(%B);
-$year = striftime("%Y");
+$day = strftime("%d");
+$mon = strftime("%B");
+$year = strftime("%Y");
 ?>
 !DOCTYPE html>
 <head>
@@ -24,8 +24,8 @@ $year = striftime("%Y");
   <div id="content">
     <!-- Заголовок -->
     <blockquote>
-        ?>
-        echo "Сегодня",$mon;$day;$year;
+        <?="Сегодня" . $mon . $day . $year ?>
+
     </blockquote>
     <h1>Добро пожаловать на наш сайт!</h1>
     <!-- Заголовок -->
