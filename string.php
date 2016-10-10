@@ -1,5 +1,5 @@
 <?php declare(strict_types = 1);
-/**
+/*/**
  * Created by PhpStorm.
  * User: Anna
  * Date: 28.09.2016
@@ -8,6 +8,9 @@
  */
 $word = 'word';
 $words = 'word1 word2, word3';
+
+define('CONST_NAME1', 1);
+define('CONST_NAME0', 0);
 
 //echo mb_substr($words, 6); // вырезает первые 6 символов в строке
 //echo substr($words, 6, 5); // вырезает первые 6 символов в строке и длинною в 5 символов // w
@@ -193,6 +196,61 @@ function calculator($x, $y, $operator)
 
 $obj = new \SplStack();
 
+//echo chislo(NAN);*/
 
 
-echo chislo(NAN);
+$arr = [
+    'val1',
+    'val2',
+    'val3',
+    'val4' => [
+        'key1' => 'val1'
+    ],
+    'val5',
+    'val6',
+    'val7',
+    'val8',
+];
+
+//echo count($arr);
+
+$x = false;
+$y = 0;
+
+
+
+//if($x){
+//    $x = 'true';
+//} else {
+//    $x = 'false';
+//}
+
+
+$x = ($x)
+    ? 'true'
+    : 'false';
+
+
+//echo PHP_EOL, $x;
+
+
+
+
+
+
+
+$connect = mysqli_connect('localhost', 'Anna', '1234','anna.dev' );
+$query = 'SELECT `name`, `link` FROM `menu` WHERE id IN(3,4,5)';
+$result = mysqli_query($connect, $query);
+$row = mysqli_fetch_all($result, MYSQLI_ASSOC);
+
+print_r($row);
+
+foreach($row as $menu) {
+    echo $menu['name'], PHP_EOL;
+
+}
+
+// SELECT `name`, `link` FROM `menu` WHERE id IN(3,4,5)
+
+//print_r($result);
