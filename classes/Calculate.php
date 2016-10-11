@@ -12,6 +12,15 @@ class Calculate
     public $arg1;
     public $arg2;
 
+    public function __construct($arg)
+    {
+        echo 'Объект Создан!' . PHP_EOL;
+
+        if(!empty($arg)) {
+            echo 'Hello ', $arg;
+        }
+    }
+
     public function sum() // +
     {
         return $this->arg1 + $this->arg2;
@@ -38,27 +47,29 @@ class Calculate
 }
 
 
-$calculate = new Calculate();
-var_dump($calculate);
+//$calculate = new Calculate('Lancer');
+//var_dump($calculate);
+//
+//$calculate->arg1 = 10;
+//$calculate->arg2 = 0;
+//var_dump($calculate);
+//
+//echo $calculate->division();
+//
+///* Подключение к БД */
+//$conn = mysqli_connect('localhost', 'Anna', '1234', 'anna.dev');
+//$connPDO = new PDO('mysql:host=localhost;dbname=anna.dev', 'Anna', '1234');
+//var_dump($conn);
+//
+///*  */
+//$sql = "SELECT * FROM `product`";
+//$result = $connPDO->query($sql);
+//print_r($result);
+//
+//echo PHP_EOL . PHP_EOL . PHP_EOL . PHP_EOL . PHP_EOL;
+//
+//foreach($result->fetch() as $item) {
+//    echo $item, PHP_EOL;
+//};
 
-$calculate->arg1 = 10;
-$calculate->arg2 = 0;
-var_dump($calculate);
-
-echo $calculate->division();
-
-/* Подключение к БД */
-$conn = mysqli_connect('localhost', 'Anna', '1234', 'anna.dev');
-$connPDO = new PDO('mysql:host=localhost;dbname=anna.dev', 'Anna', '1234');
-var_dump($conn);
-
-/*  */
-$sql = "SELECT * FROM `product`";
-$result = $connPDO->query($sql);
-print_r($result);
-
-echo PHP_EOL . PHP_EOL . PHP_EOL . PHP_EOL . PHP_EOL;
-
-foreach($result->fetch() as $item) {
-    echo $item, PHP_EOL;
-};
+$calc = new Calculate('Anna');
