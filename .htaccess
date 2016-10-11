@@ -1,2 +1,2 @@
-Options -Indexes +FollowSymLinks
-DirectoryIndex string.php
+#Options -Indexes +FollowSymLinks
+#DirectoryIndex string.php

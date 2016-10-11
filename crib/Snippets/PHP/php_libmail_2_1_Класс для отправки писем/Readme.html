@@ -1,0 +1,1425 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+
+<html>
+<head>
+<base href="http://webi.ru/">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>php_libmail класс для отправки писем</title>
+<meta name="keywords" content="libmail, mail(), smtp, php, файлы, attachment, прикрепленные файлы, простой, бесплатно, мощный, html">
+<meta name="description" content="универсальный php класс для отправки писем через SMTP, либо через стандартную функцию mail (), с возможностью прикреплять файлы. возможность отправлять письма в формате html, поддержка email адресов в национальных доменах (рф и любых других).">
+<link rel="stylesheet" href="http://webi.ru/template/default/main/css.css" type="text/css">
+<link rel="icon" href="http://webi.ru/favicon.ico" type="image/x-icon">
+<link rel="shortcut icon" href="http://webi.ru/favicon.ico" type="image/x-icon">
+
+<link rel="alternate" type="application/atom+xml" title="Все поступления на сайт" href="http://webi.ru/index.php?webirss=atom" />
+<link rel="alternate" type="application/atom+xml" title="Раздел Статьи" href="http://webi.ru/index.php?webicl=art&webirss=atom" />
+<link rel="alternate" type="application/atom+xml" title="Раздел Файлы" href="http://webi.ru/index.php?webicl=files&webirss=atom" />
+<link rel="alternate" type="application/atom+xml" title="Раздел Новости" href="http://webi.ru/index.php?webicl=news&webirss=atom" />
+<link rel="alternate" type="application/atom+xml" title="Раздел Услуги и сервисы" href="http://webi.ru/index.php?webicl=service&webirss=atom" />
+<link rel="alternate" type="application/atom+xml" title="Комментарии (php_libmail класс для отправки писем)" href="http://webi.ru/index.php?webicl=files&webimenu=full&webifid=20&webirss=atom" />
+
+
+    <!-- файлы и настройка для увеличения картинки -->
+<script type="text/javascript" src="http://webi.ru/js/highslide/highslide.js"></script>
+<link rel="stylesheet" type="text/css" href="http://webi.ru/js/highslide/highslide.css">
+<script type="text/javascript">
+    hs.graphicsDir = 'http://webi.ru/js/highslide/graphics/';
+    hs.outlineType = null;
+    hs.wrapperClassName = 'colored-border';
+</script>
+
+
+
+<script type="text/javascript" src="http://webi.ru/js/abc.js"></script>
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-28505061-2']);
+  _gaq.push(['_trackPageview']);
+  _gaq.push(['_trackPageLoadTime']);
+
+  (function () {
+      var ga = document.createElement('script');
+      ga.type = 'text/javascript';
+      ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+</head>
+
+<body link="#317095" vlink="#317095" topmargin="0">
+
+
+
+
+
+
+<table width="100%" border="0" cellpadding="0" cellspacing="0" bgcolor="#F7FBFD">
+  <tr>
+    <td width="15%" align="left" valign="top">
+    <table width="100%" border="0" cellpadding="3" cellspacing="3">
+      <tr>
+        <td align="left"> <h2><a href="http://webi.ru"><font color="#000000"><em>WeBi<font color="#C2DCEB">nstruments</font></em></font></a></h2>
+          <h4>Инструментарий для веб-мастеров</h4>
+          <noindex>
+          <script id="webi_zakladki_del" src="http://zakladki.webi.ru/zakladki/?mode=1" type="text/javascript"></script>
+
+          </noindex> 
+          </td>
+      </tr>
+    </table>
+        </td>
+
+    <td width="15%" align="center" valign="midle">
+    <h3>
+    <a style="color:red" href="http://webi.ru/technical_support_site.html">Техподдержка и <br>сопровождение<br> сайтов</a></h3></td>
+
+
+
+    <td align="left" valign="top"><table width="100%" border="0" cellpadding="3" cellspacing="3">
+      <tr>
+        <td>
+
+
+
+	<!--
+<table width="100%" border="0" cellpadding="3" cellspacing="3" bgcolor="#68A2E1" style="background: #68A2E1; border: 0px solid gray; -webkit-border-radius: 5px; o-border-radius:5px; -moz-border-radius:5px; border-radius: 5px;">
+<tbody><tr>
+<td>
+  <font color="#FFFFFF"><b>Сдам эту зону под рекламу на две недели за 1000 руб.
+    <br>
+    Предложение экспериментальное, цена будет меняться в сторону увеличения. Желающие купить эту зону, обращайтесь в <a href="http://webi.ru/feedback.html">контакты</a>. </b></font></td>
+</tr>
+</tbody></table>
+-->
+ <br>
+
+
+
+<form method='GET' action="http://webi.ru/index.php?webicl=files&webimod=poisk">
+<table width="100%" border='0' cellpadding="3" cellspacing="3" bgcolor="#1B4F88" style="background: #1B4F88; border: 0px solid gray; -webkit-border-radius: 5px; o-border-radius:5px; -moz-border-radius:5px; border-radius: 5px;">
+
+<tr>
+<td valign="top">
+<input type="hidden" name="webimod" value="poisk">
+<input style="width:100%" type='text' name='webiquery' id='query' value='' />
+</td>
+
+<td width="100" valign="top"><input type="submit" value="Искать" /></td>
+</tr>
+
+<tr>
+  <td colspan="2" valign="top">
+
+
+
+  <table border="0"><tr>  <td>	 <input checked="checked" type="checkbox" name="webipar[]" value="1">	  <font color="#FFFFFF">на сайте</font></td>   <td width="3"> </td>    <td>	 <input type="checkbox" name="webipar[]" value="3">	  <font color="#FFFFFF">на всех сайтах для веб разработчиков</font></td>   <td width="3"> </td>    <td>	 <input type="checkbox" name="webipar[]" value="4">	  <font color="#FFFFFF">везде</font></td>   <td width="3"> </td>   </tr></table>
+
+
+
+
+
+
+
+
+
+  </td>
+  </tr>
+</table>
+
+</form>
+
+
+
+
+
+
+
+ </td>
+      </tr>
+    </table>    </td>
+  </tr>
+</table>
+
+
+
+
+
+<table width="100%" border="0" cellpadding="0" cellspacing="0" bgcolor="#C2DCEB">
+  <tr>
+    <td>&nbsp;</td>
+  </tr>
+</table>
+<table width="100%" border="0" cellpadding="0" cellspacing="0" bgcolor="#F7FBFD">
+  <tr>
+  <td width="1" bgcolor="#C2DCEB"></td>
+    <td width="15%" align="left" valign="top">
+
+
+&nbsp;<a href="http://webi.ru/webi_files/4.html"><b>Скрипты</b></a> <br>
+<nobr>&nbsp;&nbsp;<a href="http://webi.ru/webi_files/6.html">PHP скрипты</a> &nbsp;&nbsp;</nobr><br>
+<nobr>&nbsp;&nbsp;<a href="http://webi.ru/webi_files/30.html">Flash скрипты</a> &nbsp;&nbsp;</nobr><br>
+<nobr>&nbsp;&nbsp;<a href="http://webi.ru/webi_files/javascript/">Javascript скрипты</a> &nbsp;&nbsp;</nobr><br>
+<br>
+
+&nbsp;<a href="http://webi.ru/webi_files/2.html"><b>Софт</b></a><br>
+<nobr>&nbsp;&nbsp;<a href="http://webi.ru/webi_files/12.html">Инструменты SEO</a> &nbsp;&nbsp;</nobr><br>
+<nobr>&nbsp;&nbsp;<a href="http://webi.ru/webi_files/20.html">Разработка сайтов</a> &nbsp;&nbsp;</nobr><br>
+<nobr>&nbsp;&nbsp;<a href="http://webi.ru/webi_files/28.html">Серверное ПО</a> &nbsp;&nbsp;</nobr><br>
+
+<br>
+
+
+
+&nbsp;<a href="http://webi.ru/webi_files/14.html"><b>Документация</b></a><br>
+<nobr>&nbsp;&nbsp;<a href="http://webi.ru/webi_files/18.html">MySQL</a> &nbsp;&nbsp;</nobr><br>
+<nobr>&nbsp;&nbsp;<a href="http://webi.ru/webi_files/16.html">PHP</a> &nbsp;&nbsp;</nobr><br>
+<nobr>&nbsp;&nbsp;<a href="http://webi.ru/docs/html/">HTML</a> &nbsp;&nbsp;</nobr><br>
+<nobr>&nbsp;&nbsp;<a href="http://webi.ru/webi_files/26.html">Протоколы и сервисы Internet</a> &nbsp;&nbsp;</nobr><br>
+<br>
+
+&nbsp;<a href="http://webi.ru/webi_articles/"><b>Статьи</b></a><br>
+<nobr>&nbsp;&nbsp;<a href="http://webi.ru/webi_articles/6.html">PHP</a> &nbsp;&nbsp;</nobr><br>
+<nobr>&nbsp;&nbsp;<a href="http://webi.ru/webi_articles/8.html">MySQL</a> &nbsp;&nbsp;</nobr><br>
+<nobr>&nbsp;&nbsp;<a href="http://webi.ru/webi_articles/server.html">Сервер</a> &nbsp;&nbsp;</nobr><br>
+<nobr>&nbsp;&nbsp;<a href="http://webi.ru/webi_articles/">еще...</a> &nbsp;&nbsp;</nobr><br>
+<br>
+
+<nobr>&nbsp;<a href="http://webi.ru/service/"><b>Услуги и сервисы</b></a></nobr><br>
+<nobr>&nbsp;&nbsp;<a href="http://webi.ru/service/domain/">Домены</a> &nbsp;&nbsp;</nobr><br>
+<nobr>&nbsp;&nbsp;<a href="http://webi.ru/service/hosting/">Хостинги</a> &nbsp;&nbsp;</nobr><br>
+<nobr>&nbsp;&nbsp;<a href="http://webi.ru/service/block_for_site/">Блоки для сайта</a> &nbsp;&nbsp;</nobr><br>
+
+<br>
+
+
+ &nbsp;<a href="http://webi.ru/webi_news/"><b>Новости</b></a><br>
+<br>
+
+
+
+
+<table width="100%" height="1" border="0" cellpadding="0" cellspacing="0" bgcolor="#C2DCEB">
+  <tr>
+    <td></td>
+  </tr>
+</table>
+
+<br>
+
+
+&nbsp;<b><a href="http://webi.ru/feedback.html">Контакты</a></b>
+<br>
+&nbsp;&nbsp;<b>icq:</b> 158325531<br>
+&nbsp;&nbsp;<b>email: </b><script>"web".pAddr('tge', 'adm', 'i.ru');</script><br>
+&nbsp;&nbsp;<b>все контакты:</b> <a href="http://webi.ru/feedback.html">здесь</a>
+<br>
+
+<br>
+
+<table width="100%" height="1" border="0" cellpadding="0" cellspacing="0" bgcolor="#C2DCEB">
+  <tr>
+    <td></td>
+  </tr>
+</table>
+
+<br>
+
+
+<div class="ydirect">
+
+<!-- Яндекс.Директ
+
+-->
+<script type="text/javascript">
+//<![CDATA[
+yandex_partner_id = 64968;
+yandex_site_bg_color = 'F7FBFD';
+yandex_stat_id = 2;
+yandex_site_charset = 'utf-8';
+yandex_ad_format = 'direct';
+yandex_font_size = 1;
+yandex_direct_type = 'vertical';
+yandex_direct_border_type = 'block';
+yandex_direct_limit = 3;
+yandex_direct_border_color = '336699';
+yandex_direct_title_color = '317095';
+yandex_direct_url_color = '008000';
+yandex_direct_all_color = '317095';
+yandex_direct_text_color = '000000';
+yandex_direct_hover_color = '0066FF';
+yandex_direct_favicon = false;
+document.write('<sc' + 'ript type="text/javascript" src="http://an.yandex.ru/system/context.js"></sc' + 'ript>');
+//]]>
+</script>
+
+
+
+
+</div>
+<br>
+
+
+<table width="100%" height="1" border="0" cellpadding="0" cellspacing="0" bgcolor="#C2DCEB">
+  <tr>
+    <td></td>
+  </tr>
+</table>  <br>
+<a href="http://webi.ru/index.php?webirss=atom"><img border="0" src="http://webi.ru/template/default/main/img/feed-icon.png"> Atom все поступления</a><br><a href="http://webi.ru/index.php?webicl=art&webirss=atom"><img border="0" src="http://webi.ru/template/default/main/img/feed-icon.png"> Раздел Статьи</a><br><a href="http://webi.ru/index.php?webicl=files&webirss=atom"><img border="0" src="http://webi.ru/template/default/main/img/feed-icon.png"> Раздел Файлы</a><br><a href="http://webi.ru/index.php?webicl=news&webirss=atom"><img border="0" src="http://webi.ru/template/default/main/img/feed-icon.png"> Раздел Новости</a><br><a href="http://webi.ru/index.php?webicl=service&webirss=atom"><img border="0" src="http://webi.ru/template/default/main/img/feed-icon.png"> Раздел Услуги и сервисы</a><br><a href="http://webi.ru/index.php?webicl=files&webimenu=full&webifid=20&webirss=atom"><img border="0" src="http://webi.ru/template/default/main/img/feed-icon.png"> комментарии</a><br><br>
+
+
+
+
+
+
+    </td>
+	<td width="1" bgcolor="#C2DCEB"></td>
+    <td align="left" valign="top">
+      <table width="100%" border="0" cellpadding="3" cellspacing="3">
+        <tr>
+          <td valign="top">
+<div class="kroxi"><a class="a_blue" href="http://webi.ru">Главная</a> / <a class="a_blue" href="http://webi.ru/webi_files/">Файлы</a> / <a class="a_blue" href="http://webi.ru/webi_files/4.html">Скрипты и Flash</a> / <a class="a_blue" href="http://webi.ru/webi_files/6.html">PHP скрипты</a> / <a class="a_blue" href="http://webi.ru/webi_files/22.html">Функции и классы</a> / <b>php_libmail класс для отправки писем</b></div>
+<hr width="100%" class="webi_color">
+<br>
+
+
+              <!-- рабочая страница клона -->
+
+              <!-- шаблон загружает инфу полного описания товара -->
+	<script language="JavaScript">
+	<!--
+    function openurl() {
+        open("http://webi.ru");
+    }
+    // -->
+           </script>
+
+<table cellpadding="0" cellspacing="0" border="0">
+	<tr><td valign="top">
+</td> <td valign="top"><h1>php_LibMail 2.1</h1>28.02.2010 (последний раз редактировалось 17.11.2014)<br>сайт: <a href="http://webi.ru/webi_files/php_libmail.html#" onClick="openurl()">http://webi.ru</a><br>условия использования: <b>бесплатно</b><br></td></tr> </table> <br><table border="0" cellspacing="1" cellpadding="4" bgcolor="#94C1DC">
+	   <tr><td bgcolor="white"><a href="http://webi.ru/base/files/tovar/php_libmail_2_1.zip"><b>скачать php_libmail 2.1</b></a> </td>
+	  <td bgcolor="white" valign="top"> Последняя версия (17.11.2014)</td> </tr>
+
+	   <tr><td bgcolor="white"><a href="http://webi.ru/base/files/tovar/php_libmail.zip"><b>скачать php_libmail 1.6.1</b></a> </td>
+	  <td bgcolor="white" valign="top"> Старая версия</td> </tr>
+	   </table><br><br><h2>Описание</h2>
+Универсальный Php класс для отправки писем через SMTP, либо через стандартную php функцию mail(). <br />
+Достаточно функциональный и простой в использовании.<br /><br />
+
+Основные возможности:
+
+<ul>
+  <li> Отправка письма с помощью SMTP, либо через mail() по вашему выбору</li>
+  <li> Отправка прикрепленных к письму файлов (любое количество)</li>
+  <li> Возможности отправки многим адресатам через To, CC или BCC</li>
+  <li> Возможность получить исходный текст письма без отправки, либо после отправки для ведения логов. При отправке через SMTP возращает весь диалог общения с сервером </li>
+  <li> Проверка синтаксиса email адресов</li>
+<li>Возможность установить запрос о прочтении письма </li>
+<li>Отправка писем в текстовом формате или в HTML </li>
+<li>Отправка нескольких разных писем за одно соединение с сервером, при отправке через SMTP</li>
+<li>Поддержка email адресов в национальных доменах (рф и любых других).</li>
+</ul>
+
+<br />
+<hr width="100%" class="webi_color" />
+
+
+<h2>История изменений</h2>
+
+<strong>версия 2.1 (17.11.2014)</strong>
+<ul>
+<li>
+Поддержка email-ов с национальными доменами, не только в кириллице (типа имя.рф), но и на любых других языках.<br />
+ По умолчанию данная функция выключена, чтобы ее активировать нужно при запуске класса передать третий параметр TRUE <br />
+$m=new Mail('','',true); // Первые два параметра остаются так же как были у вас и раньше. Если у вас ничего не было заполнено, то поставьте пустые кавычки как в этом примере.<br />
+Все адреса с национальными доменами должны быть переданы в юникоде (UTF-8)
+
+</li>
+</ul>
+
+<strong>версия 2.0 (18.10.2013)</strong>
+<ul>
+<li>
+Решил уйти от совместимости со старыми версиями PHP, теперь скрипт работает с PHP 5 и выше.
+</li>
+<li>
+Кодировка по умолчанию теперь UTF-8. Обратите внимание, кодировка скрипта тоже UTF-8.
+</li>
+<li>
+Переработан механизм формирования письма и заголовков.
+</li>
+<li>
+Исправлены проблемы с прикреплением файлов с русскими именами.
+</li>
+<li>
+После выполнения скрипта можно узнать статус отправки письма. <br />
+$m-&gt;status_mail['status'] - при удачной отправке здесь будет TRUE, при ошибке FALSE<br />
+$m-&gt;status_mail['message'] - здесь текст ошибки или удачной отправки</li>
+<li>
+Модернизирована отправка HTML письма. Теперь к html версии письма можно добавить альтернативную текстовую. <br />
+Для чего это нужно? Если почтовая программа получателя не умеет обрабатывать html или пользователь в настройках запретил обработку html,
+то будет отображаться альтернативная текстовая версия. В современном интернете это не очень актуально, так как все сейчас видят письма в HTML,
+но все почтовые программы по прежнему формируют письмо именно с альтернативным текстом.
+
+</li>
+<li>
+Кодирование письма в base64. Теперь кодирование в base64 включено по умолчанию, очень советую так и оставить, но кому не нравится смогут переключиться в обычный 8bit.
+</li>
+<li>
+Возможность отправки разных писем за одно соединение, либо одного письма, но индивидуально для некоторых.
+Поясню. Если вам нужно отправить письмо нескольким получателям, то вы можете как и раньше перечислить их всех с помощью <br />
+$m-&gt;To("asd@asd.ru");<br />
+$m-&gt;To("yui@xcf.ru");<br />
+В этом случае письмо будет отправлено всем этим адресатам и в поле TO (кому) будут все они перечислены и все получатели будут видеть кому еще было отправлено письмо.<br />
+В этой версии появилась возможность отправлять несколько индивидуальных писем за одно соединение.
+Сколько таких индивидуальных писем можно отправить за раз, все зависит от лимитов вашего SMTP сервера. Некоторые сервера не разрешают отправлять более пяти писем за раз, другие 100-200 разрешают.<br />
+Если отправляете индивидульные письма не через SMTP, то в данном случае просто будет вызвана несколько раз функция mail() - так что на нее тоже есть ограничения.
+</li>
+<li><strong> Совместимость с версией 1.6.1</strong>. <br />
+Для перехода с предыдущих версий на 2.0 учтите слудующее.<br />
+$m=new Mail(); - Если вы запускали класс без указания кодировки, то в предыдущих версиях письма формировались в windows-1251, сейчас такая команда запускает UTF-8.
+Если вам по прежнему нужно использовать windows кодировку, укажите ее $m=new Mail("windows-1251");<br />
+И второй момент. Получение лога по умолчанию не работает. Если вы используете $m-&gt;Get();, то сейчас вам нужно сначала включить накопление лога.
+Для этого до отправки письма включите лог $m-&gt;log_on(true); и после этого $m-&gt;Get() сработает как прежде.
+<br />
+В остальном совместимость должна остаться.
+ </li>
+</ul>
+
+
+
+
+
+<strong>версия 1.6.1 (02.10.2013)</strong>
+<ul>
+<li>
+Добавлена возможность встраивать картинки внутрь html<br />
+Для этого как и раньше прикрепляете картинки к письму<br />
+Например две картинки<br />
+$m-&gt;Attach( "1.jpg", "", "image/jpeg" );<br />
+$m-&gt;Attach( "2.jpg", "", "image/jpeg" );<br />
+А в самом html тексте письма вставляете картинки так<br />
+&lt;img src="cid:1.jpg"&gt;<br />
+&lt;img src="cid:2.jpg"&gt;<br />
+<br />
+Например<br />
+$m-&gt;Body( 'Текст &lt;img src="cid:1.jpg"&gt;&lt;br&gt;текст&lt;img src="cid:2.jpg"&gt;&lt;br&gt; И т.д.', "html" );
+
+<br />
+Обратите внимание, тип сообщения должен быть html
+
+</li>
+</ul>
+
+
+
+<strong>версия 1.6.0 (09.12.2011)</strong>
+<ul>
+<li>
+Добавлена возможность добавлять имена к почтовым ящикам<br />
+Действует в From, To и ReplyTo <br />
+Имя добавляется через разделитель ';' например<br />
+$m-&gt;To( "Максим;adm@webi.ru" );
+</li>
+</ul>
+
+
+
+<strong>версия 1.5.1 (07.02.2011)</strong>
+<ul>
+<li> Адаптирована функция проверки email адресов на валидность под php 5.2 и выше.</li>
+</ul>
+
+
+<strong>версия 1.5 (28.02.2010)</strong>
+<ul>
+<li> Добавлена возможность отправлять почту через SMTP. <br />
+  Подключается с помощью новой команды <strong>smtp_on()</strong>.</li>
+</ul>
+
+<strong>версия 1.4 (24.02.2010)</strong>
+<ul>
+<li> адаптация к русской кодировке</li>
+<li> возможность переименовывать прикрепленный файл</li>
+<li> возможность отправлять письма в формате html</li>
+<li> изменения в вызове некоторых функций</li>
+
+</ul>
+<br />
+
+<hr width="100%" class="webi_color" />
+
+<h2>Пример использования</h2>
+<br />
+
+
+<code><span style="color: #000000;">
+<span style="color: #0000bb;">&lt;?php<br />
+</span><span style="color: #007700;">include </span><span style="color: #dd0000;">"libmail.php"</span><span style="color: #007700;">; </span><span style="color: #ff8000;">// вставляем файл с классом<br />
+</span><span style="color: #0000bb;">$m</span><span style="color: #007700;">= new </span><span style="color: #0000bb;">Mail</span><span style="color: #007700;">; </span><span style="color: #ff8000;">// начинаем <br />
+</span><span style="color: #0000bb;">$m</span><span style="color: #007700;">-&gt;</span><span style="color: #0000bb;">From</span><span style="color: #007700;">( </span><span style="color: #dd0000;">"asd@asd.com" </span><span style="color: #007700;">); </span><span style="color: #ff8000;">// от кого отправляется почта <br />
+</span><span style="color: #0000bb;">$m</span><span style="color: #007700;">-&gt;</span><span style="color: #0000bb;">To</span><span style="color: #007700;">( </span><span style="color: #dd0000;">"komu@asad.com" </span><span style="color: #007700;">); </span><span style="color: #ff8000;">// кому адресованно<br />
+</span><span style="color: #0000bb;">$m</span><span style="color: #007700;">-&gt;</span><span style="color: #0000bb;">Subject</span><span style="color: #007700;">( </span><span style="color: #dd0000;">"Тема сообщения" </span><span style="color: #007700;">);<br />
+</span><span style="color: #0000bb;">$m</span><span style="color: #007700;">-&gt;</span><span style="color: #0000bb;">Body</span><span style="color: #007700;">( </span><span style="color: #dd0000;">"Текст письма" </span><span style="color: #007700;">);&nbsp;&nbsp;&nbsp;&nbsp;<br />
+</span><span style="color: #0000bb;">$m</span><span style="color: #007700;">-&gt;</span><span style="color: #0000bb;">Cc</span><span style="color: #007700;">( </span><span style="color: #dd0000;">"copy@asd.com"</span><span style="color: #007700;">); </span><span style="color: #ff8000;">// копия письма отправится по этому адресу<br />
+</span>
+
+<span style="color: #0000bb;">$m</span><span style="color: #007700;">-&gt;</span><span style="color: #0000bb;">Bcc</span><span style="color: #007700;">( </span><span style="color: #dd0000;">"bcopy@asd.com"</span><span style="color: #007700;">); </span><span style="color: #ff8000;">// скрытая копия отправится по этому адресу<br />
+</span><span style="color: #0000bb;">$m</span><span style="color: #007700;">-&gt;</span><span style="color: #0000bb;">Priority</span><span style="color: #007700;">(</span><span style="color: #0000bb;">3</span><span style="color: #007700;">) ;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #ff8000;">// приоритет письма<br />
+</span>
+
+
+<span style="color: #0000bb;">$m</span><span style="color: #007700;">-&gt;</span><span style="color: #0000bb;">Attach</span><span style="color: #007700;">( </span><span style="color: #dd0000;">"asd.gif"</span><span style="color: #007700;">,</span><span style="color: #dd0000;">""</span><span style="color: #007700;">, </span><span style="color: #dd0000;">"image/gif" </span><span style="color: #007700;">) ; </span><span style="color: #ff8000;">// прикрепленный файл <br />
+</span>
+
+<span style="color: #0000bb;">$m</span><span style="color: #007700;">-&gt;</span><span style="color: #0000bb;">smtp_on</span><span style="color: #007700;">( </span><span style="color: #dd0000;">"smtp.asd.com"</span><span style="color: #007700;">, </span><span style="color: #dd0000;">"login"</span><span style="color: #007700;">, </span><span style="color: #dd0000;">"password" </span><span style="color: #007700;">) ; </span><span style="color: #ff8000;">// если указана эта команда, отправка пойдет через SMTP <br />
+</span>
+
+
+<span style="color: #0000bb;">$m</span><span style="color: #007700;">-&gt;</span><span style="color: #0000bb;">Send</span><span style="color: #007700;">();&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #ff8000;">// а теперь пошла отправка<br />
+<br />
+</span><span style="color: #007700;">echo </span><span style="color: #dd0000;">"Показывает исходный текст письма:&lt;br&gt;&lt;pre&gt;"</span><span style="color: #007700;">, </span><span style="color: #0000bb;">$m</span><span style="color: #007700;">-&gt;</span><span style="color: #0000bb;">Get</span><span style="color: #007700;">(), </span><span style="color: #dd0000;">"&lt;/pre&gt;"</span><span style="color: #007700;">;<br />
+</span><span style="color: #0000bb;">?&gt;</span>
+</span></code>
+<br />
+<br />
+<hr width="100%" class="webi_color" />
+
+
+
+
+<h2>Описание класса </h2>
+<hr align="left" width="30%" class="webi_color" />
+<h3>Mail( [кодировка], [base64|8bit], [idna convert FALSE|TRUE] ) </h3>
+Начало работы с классом. <br />
+По умолчанию кодировка письма UTF-8, для отправки письма в другой кодировке укажите ее.<br />
+<br />
+
+<code>
+$mail = new Mail(); // кодировка по умолчанию<br />
+ИЛИ<br />
+$mail = new Mail("windows-1251"); // любая кодировка
+</code>
+<br />
+Второй параметр это Content-Transfer-Encoding - нужно ли кодировать текст письма в <strong>base64</strong> или отправлять без кодирования(<strong>8bit</strong>), открытым текстом. По умолчанию установлено base64, крайне не рекомендуется менять этот параметр, base64 наиболее удобен и оптимален для отправки почты.
+<br /><br />
+<code>
+// отправка письма открытым текстом. Первый параметр(кодировка) пустой, значит в данном случае кодировка будет по умолчанию UTF-8. <br />
+$mail = new Mail('','8bit');
+</code>
+<br />
+Третий параметр idna convert включает поддержку адресов в национальных доменах (Имя.РФ и на любых других языках). <br />
+По умолчанию данная функция выключена. При включении TRUE можно отправлять почту на любые адреса, национальные и международные. Класс будет автоматически определять домены и при необходимости конвертировать их. <br />
+Если вы используете этот класс для постоянной отправки с одного и тоже адреса и на один и тот же адрес и они "обычные" - не национальные, тогда лучше не включать эту функцию для экономии оперативной памяти.
+<br /><br />
+<code>
+ <br />
+$mail = new Mail('','',true); // включение поддержки адресов в национальных доменах
+</code>
+<br />
+Любой из этих параметров необязательный, чтобы оставить любой параметр по умолчанию, используйте пустые кавычки.
+<br />
+<br />
+
+<hr align="left" width="30%" class="webi_color" />
+
+<h3>smtp_on( smtp_server, login, password, [ port ], [ timeout ] ) </h3>
+Включение отправки письма через SMTP. <br />
+Если хотите отправить письмо через SMTP, используйте эту команду. <br />
+Если нет необходимости отправлять через SMTP, проигнорируйте данную команду.<br />
+<br />
+<ul>
+<li><strong>smtp_server: </strong> для соединения с smtp по обычному протоколу указывается сервер в обычном формате, например "<strong>smtp.mail.ru</strong>". <br />
+Для соединения с сервером по защищенному протоколу, например с gmail.com, нужно добавить перед сервером " <strong>ssl://</strong>", например  "<strong>ssl://smtp.gmail.com</strong>". Так же не забудьте указать порт, для защищенных соединений он обычно 465. <br />
+<br />
+</li>
+<li>
+  <strong>login: </strong>логин для авторизации через smtp<br />
+<br />
+ </li>
+ <li>
+   <strong>password: </strong>пароль для авторизации smtp <br />
+   <br />
+ </li>
+
+  <li>
+   <strong>port: </strong> порт для соединения smtp. Если порт стандартный, можно не указывать, по умолчанию 25 <br />
+   <br />
+ </li>
+  <li>
+   <strong>timeout: </strong>таймаут соединения. По умолчанию стоит 5 секунд. Обычно менять не нужно, но если smtp тормозной или ваш конект к серверу длиный, можно увеличить.  <br />
+   <br />
+ </li>
+
+</ul>
+
+<code>
+$mail-&gt;smtp_on("smtp.mail.ru","login","passw"); // пример стандартного соединения <br />
+ИЛИ<br />
+$mail-&gt;smtp_on("ssl://smtp.gmail.com","login","passw", 465); // пример защищенного соединения. стандартный порт изменен на 465 </code>
+<br />
+<br />
+<hr align="left" width="30%" class="webi_color" />
+
+<h3>Subject( текст )</h3>
+Тема письма.
+<br />
+<br />
+<code>$mail-&gt;Subject( "Привет" );
+</code>
+<br />
+
+<hr align="left" width="30%" class="webi_color" />
+
+<h3>From( email )</h3>
+Email от кого отправляется письмо. <br />
+Для добавления имен к адресам используйте разделитель ';' (виктор;from@asd.com)
+<br /><br />
+
+<code>	$mail-&gt;From( "from@asd.com" );
+</code><br />
+
+или пример с именем<br />
+<code>	$mail-&gt;From( "сергей;from@asd.com" );
+</code><br />
+
+
+
+<hr align="left" width="30%" class="webi_color" />
+
+<h3>To( email )</h3>
+Кому отправляется письмо.<br />
+Чтобы отправить письмо нескольким адресатам, можно в качестве входящего параметра передать массив адресов либо вызывать несколько раз эту команду.<br />
+Для добавления имен к адресам используйте разделитель ';' (виктор;to@asd.com)
+<br />
+<br />
+<code>
+// отправка одному адресату<br />
+$mail-&gt;To( "to@asd.com" ); <br /><br />
+
+// отправка нескольким адресатам используя массив<br />
+$to_array = array( "to1@asd.com", "to2@asd.com" );<br />
+$mail-&gt;To( $to_array );<br />
+<br />
+
+// отправка нескольким адресатам без использования массива<br />
+$mail-&gt;To( "1@asd.com" ); <br />
+$mail-&gt;To( "2@qwe.com" );
+</code>
+<br />
+<hr align="left" width="30%" class="webi_color" />
+
+
+<h3>CC( email )</h3>
+Кому отправить копию письма.<br />
+
+Чтобы отправить копию нескольким адресатам, можно в качестве входящего параметра передать массив адресов либо вызывать несколько раз эту команду.
+<br />
+<br />
+<code>
+// отправка одному адресату<br />
+$mail-&gt;CC( "to@asd.com" ); <br /><br />
+
+// отправка нескольким адресатам используя массив<br />
+$cc_array = array( "cc1@asd.com", "cc2@asd.com" );<br />
+$mail-&gt;CC( $cc_array );<br />
+<br />
+
+// отправка нескольким адресатам без использования массива<br />
+$mail-&gt;CC( "1@asd.com" ); <br />
+$mail-&gt;CC( "2@qwe.com" );
+</code>
+<br />
+<hr align="left" width="30%" class="webi_color" />
+
+
+<h3>BCC( email )</h3>
+
+Кому оправить скрытую копию письма.<br />
+Так же как и в предыдущих командах можно отправить копию нескольким адресатам используя массив или вызывая несколько раз эту команду.
+<br />
+<br />
+<code>
+// отправка одному адресату<br />
+$mail-&gt;BCC( "to@asd.com" ); <br /><br />
+
+// отправка нескольким адресатам используя массив<br />
+$bcc_array = array( "to1@asd.com", "to2@asd.com" );<br />
+$mail-&gt;BCC( $bcc_array );<br />
+<br />
+
+// отправка нескольким адресатам без использования массива<br />
+$mail-&gt;BCC( "1@asd.com" ); <br />
+$mail-&gt;BCC( "2@qwe.com" );
+</code>
+<br />
+<hr align="left" width="30%" class="webi_color" />
+
+
+
+<h3>Body( текст письма, [ text | html ] )</h3>
+
+В эту команду помещается текст письма. По умолчанию письмо формируется обычным текстовым, для отправки письма в формате html нужно нужно указать это во втором параметре.<br />
+<br />
+
+
+<code>
+$mail-&gt;Body( "Обычный текст, никакого html нет" );<br />
+ИЛИ<br />
+$mail-&gt;Body( "Письмо в формате html. &lt;b&gt;Жирный&lt;/b&gt; текст.", "html" ); // в данном примере указан формат "html"<br />
+ИЛИ<br />
+$mail-&gt;Body( 'Вот пошла первая картинка &lt;img src="cid:1.jpg"&gt;&lt;br&gt;Теперь вторая &lt;img src="cid:2.jpg"&gt;&lt;br&gt; И т.д.', "html" ); // пример как вставить в html прикрепленные к письму картинки.
+
+</code><br />
+<br />
+<hr align="left" width="30%" class="webi_color" />
+
+
+<h3>Attach( filename, [new filename], [mimetype], [disposition] )</h3>
+Прикрепление файлов к письму. Чтобы прикрепить несколько файлов нужно просто повторять команду с нужными параметрами.<br />
+Если вы прикрепляете картинки, то вы можете их вставить внутрь html письма.<br />
+Адрес картинок будет такой cid:name.jpg, для вставки в html используйте так <br />
+&lt;img src="cid:name.jpg"&gt;<br />
+Чтобы вставлять картинки в html обязательно указывайте их mimetype(image/jpeg,image/gif...) при прикреплении файла.
+<ul>
+<li> <strong>filename</strong> : путь к файлу на диске</li>
+<li> <strong>new filename</strong> : какое имя будет у файла в письме. если ничего не указать, имя файла останется оригинальным.</li>
+<li> <strong>mimetype</strong> : MIME-тип файла. Если не указать, то тип будет 'application/x-unknown-content-type'.</li>
+<li> <strong>disposition</strong> : команда для почтового клиента, как ему отображать вложение. <br />
+<strong>inline</strong> (по умолчанию), при просмотре письма вложение должно отображаться непосредственно в самом теле письма, например картинка. <br />
+<strong>attachment</strong>, вложение не будет отображаться в самом письме, оно будет как прикрепленный файл.<br />
+Не все почтовые программы обращают внимание на этот параметр.</li>
+</ul>
+<br />
+
+
+<code>
+// при прикрепелении файла ему дается другое имя в письме. так же указан mime тип файла<br />
+$mail-&gt;Attach( "/home/path/123.gif", "logo.gif", "image/gif" );<br />
+<br />
+
+
+
+	// при прикреплении письма не указано другое имя файла, поэтому имя останется не измененным. не указан mime тип. вариант отображения в почтовом клиенте указан как прикрепленный файл <br />
+	$mail-&gt;Attach( "C:/Documents/resume.doc", "", "", "attachment" );</code>
+<br />
+<br />
+<hr align="left" width="30%" class="webi_color" />
+
+
+
+<h3>autoCheck( boolean )</h3>
+Включает/выключает проверку email адресов на валидность. По умолчанию включено.<br />
+<br />
+
+<code>
+$mail-&gt;autoCheck( false ); // проверка выключена<br />
+$mail-&gt;autoCheck( true ); //  проверка включена
+</code>
+<br />
+<br />
+
+<hr align="left" width="30%" class="webi_color" />
+
+
+<h3>Organization( организация )</h3>
+Поле для указания вашей организации.<br />
+<br />
+
+<code>
+$mail-&gt;Organization( "Моя фирма" );
+</code><br />
+<br />
+<hr align="left" width="30%" class="webi_color" />
+
+
+<h3>ReplyTo( email )</h3>
+на какой email можно ответить.<br />
+Для добавления имен к адресам используйте разделитель ';' (виктор;victor@asd.com)
+<br />
+<br />
+
+<code>
+$mail-&gt;ReplyTo( "repl@asd.com" );
+</code><br />
+<br />
+<hr align="left" width="30%" class="webi_color" />
+
+
+<h3>Priority( приоритет )</h3>
+Приоритет письма. Важность. Дает информацию адресату понять, какие письма наиболее важны.<br />
+От 1 (высокая важность) до 5 (низкая важность).<br />
+Рекомендуемый приоритет 3.<br />
+<br />
+
+<code>$mail-&gt;Priority( 3 );</code><br />
+<br />
+<hr align="left" width="30%" class="webi_color" />
+
+
+<h3>Receipt()</h3>
+Подтверждение о прочтении.<br />
+Некоторые почтовые клиенты могут отправить на обратный адрес письмо о том, что ваше сообщение получено или читается.<br /><br />
+<code>
+$mail-&gt;Receipt();
+</code><br />
+<br />
+
+<hr align="left" width="30%" class="webi_color" />
+
+<h3>Send()</h3>
+Отправка письма. После всех команд выполняется эта, она отправит письмо.<br />
+<code>	$mail-&gt;Send();
+</code><br />
+<br />
+
+<hr align="left" width="30%" class="webi_color" />
+
+<h3>Get()</h3>
+Для тестирования.<br />
+Возвращает текст письма вместе с заголовками. <br />
+Можно использовать вместо отправки письма не используя отправку Send(), возвратит текст письма и заголовки, готовые к отправке.<br />
+Если использовать после отправки письма, так же возвратит заголовки и текст, но если отправка была с помощью smtp возвратит еще и весь далог общения с сервером.
+<br />
+ Можно сохранять в файл для ведения логов или вывести на экран.<br />
+<br />
+
+
+<code>
+$msg = $mail-&gt;Get(); // получение в переменную<br />
+print $msg; // вывод в браузер
+</code><br><br>
+
+
+
+
+<hr class="webi_color" align="left" width="70%">
+<font color="#009F6B"><h2>Комментарии</h2> </font>
+<a href="http://webi.ru/index.php?webicl=files&webimenu=full&webifid=20&webirss=atom"><img border="0" src="http://webi.ru/template/default/main/img/feed-icon.png"> RSS комментарии</a><br><br>
+
+
+<br>
+
+<b>28.07.2010 Александр</b>
+<br>
+Отличный скрипт. Пользуюсь им уже давно. Спасибо автору скрипта за такое нужное дело.<br>
+<br>
+
+<hr class="webi_color" align="left" width="70%">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<br>
+
+<b>06.09.2010 Алексей</b>
+<br>
++1 Просто ничего лучше в жизни не видел! :) Автору просто зачет и огромное спасибо!<br>
+<br>
+
+<hr class="webi_color" align="left" width="70%">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<br>
+
+<b>08.09.2010 Петро</b>
+<br>
+Привет а форму как злабадать<br>
+<br>
+
+<hr class="webi_color" align="left" width="70%">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<br>
+
+<b>18.12.2010 Дамир</b>
+<br>
+Спасибо автору! Нужно было отправить файлы во вложении, через эту библиотеку все получилось просто и быстро:)<br>
+<br>
+
+<hr class="webi_color" align="left" width="70%">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<br>
+
+<b>02.02.2011 Владимир</b>
+<br>
+Автору респект<br>
+<br>
+
+<hr class="webi_color" align="left" width="70%">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<br>
+
+<b>06.02.2011 Валентин</b>
+<br>
+В версии PHP 5.2 выдает ошибку на функцию ereg.<br />
+Вы делает проверку емайла на валидность этой функцией.<br />
+А почему бы не проверять с помощью <br />
+filter_var($address, FILTER_VALIDATE_EMAIL)) ??<br>
+<br>
+
+<hr class="webi_color" align="left" width="70%">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<br>
+
+<b>06.02.2011 админ</b>
+<br>
+Валентин, спасибо за совет, внес поправки.<br />
+версия 1.5.1 - валидация email адресов адаптирована к старым и новым версиям PHP именно с помощью filter_var()<br>
+<br>
+
+<hr class="webi_color" align="left" width="70%">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<br>
+
+<b>10.02.2011 Валентин</b>
+<br>
+Не за что.<br />
+Спасибо за Класс, очень полезный.<br>
+<br>
+
+<hr class="webi_color" align="left" width="70%">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<br>
+
+<b>17.02.2011 Александр</b>
+<br>
+Добрый день.<br />
+Спасибо за класс.<br />
+Не подскажите как прикрепить динамически созданный файл? Например, файл pdf созданный с помощью tcpdf.<br />
+Спасибо.<br>
+<br>
+
+<hr class="webi_color" align="left" width="70%">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<br>
+
+<b>17.02.2011 админ</b>
+<br>
+Александр, к сожалению пока нет возможности отправить файл из буфера.<br />
+Перед отправкой сохраните файл физически, отправьте, а затем удалите его.<br>
+<br>
+
+<hr class="webi_color" align="left" width="70%">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<br>
+
+<b>18.02.2011 Александр</b>
+<br>
+Удалось отправить генерируемый pdf. Tcpdf позволяет получать документ в base64 mime multi-part<br>
+<br>
+
+<hr class="webi_color" align="left" width="70%">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<br>
+
+<b>04.03.2011 MannishArt</b>
+<br>
+спасибо автору больше,очень пригодилось)<br>
+<br>
+
+<hr class="webi_color" align="left" width="70%">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<br>
+
+<b>04.03.2011 MannishArt</b>
+<br>
+а вот хотел бы спросить,а как несколько аттачмантов сделать?<br>
+<br>
+
+<hr class="webi_color" align="left" width="70%">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<br>
+
+<b>04.03.2011 Александр</b>
+<br>
+Искал замену PHPMailer и вот нашёл замечательное решение. Спасибо! Сделано очень профессионально.<br>
+<br>
+
+<hr class="webi_color" align="left" width="70%">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<br>
+
+<b>04.03.2011 Александр</b>
+<br>
+Строка 564:<br />
+if (isset($this-&gt;smtp_log)) return $this-&gt;smtp_log; // если есть лог отправки smtp выведем его<br />
+Добавил функцию isset(), потому что без неё появлялась ошибка о необъявленном свойстве класса<br>
+<br>
+
+<hr class="webi_color" align="left" width="70%">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<br>
+
+<b>05.03.2011 админ</b>
+<br>
+MannishArt, чтобы несколько файлов прикрепить, просто несколько раз повторяйте команду $mail-&gt;Attach(), естественно с нужными параметрами.<br>
+<br>
+
+<hr class="webi_color" align="left" width="70%">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<br>
+
+<b>05.03.2011 админ</b>
+<br>
+Александр, ваш пример сработает даже в том случае, если $this-&gt;smtp_log=&quot;&quot;<br />
+но это не много нарушает смысл этого условия.<br />
+Тогда лучше сделать так.<br />
+		<br />
+if(isset($this-&gt;smtp_log))<br />
+{<br />
+ if ($this-&gt;smtp_log)  return $this-&gt;smtp_log; <br />
+}<br />
+<br />
+Спасибо за совет, я внес эту поправку в скрипт, только версию скрипта конечно не стал менять.<br>
+<br>
+
+<hr class="webi_color" align="left" width="70%">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<br>
+
+<b>05.03.2011 MannishArt</b>
+<br>
+Вот я написал в скрипте:<br />
+$m-&gt;Attach( &quot;ПриходМарт(Разное).xls&quot;,&quot;&quot;, &quot;attachment&quot; ) ;<br />
+$m-&gt;Attach( &quot;Mixer_march.jpg&quot;,&quot;&quot;, &quot;attachment&quot; ) ; <br />
+$m-&gt;Attach( &quot;quote_march.txt&quot;,&quot;&quot;, &quot;attachment&quot; ) ;<br />
+<br />
+А в письме приходит как:<br />
+(Разное).xls (560 Кб) <br />
+Mixer_march.jpg (2.5 Кб) <br />
+quote_march.txt (72 )<br />
+почему-то обрезается &quot;ПриходМарт&quot;<br>
+<br>
+
+<hr class="webi_color" align="left" width="70%">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<br>
+
+<b>07.03.2011 MannishArt</b>
+<br>
+а ещё можете подсказать,я отправляю из программы тему и заголовок скрипту,а в письме приходит РўРµРјР° РїРёСЃСЊРјР° вот такое вот,это что-то с кодировкой?<br>
+<br>
+
+<hr class="webi_color" align="left" width="70%">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<br>
+
+<b>07.03.2011 Илья</b>
+<br>
+Да, возможно это проблемы с кодировкой. Попробуйте поменять, самые распространенные на данный момент это windows-1251 и UTF-8. Посмотрите в каком будет читаться и установите по умолчанию. <br>
+<br>
+
+<hr class="webi_color" align="left" width="70%">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="str"> <b>1</b>  <a href="http://webi.ru/webi_files/php_libmail-2.html" class="a_blue">2</a> <a href="http://webi.ru/webi_files/php_libmail-3.html" class="a_blue">3</a> <a href="http://webi.ru/webi_files/php_libmail-4.html" class="a_blue">4</a> <a href="http://webi.ru/webi_files/php_libmail-5.html" class="a_blue">5</a> <a href="http://webi.ru/webi_files/php_libmail-6.html" class="a_blue">6</a> <a href="http://webi.ru/webi_files/php_libmail-7.html" class="a_blue">7</a> <a href="http://webi.ru/webi_files/php_libmail-8.html" class="a_blue">8</a> <a href="http://webi.ru/webi_files/php_libmail-9.html" class="a_blue">9</a> </div>
+<br>
+
+<font color="#009F6B"><h3>Добавить свой комментарий</h3></font>
+ <form action="http://webi.ru/otpravka.php" method="POST" id="otpravka">
+<br>
+Ваше имя(<font color="red">*</font> обязательно)<br>
+<input type="text" size="50" name="webiadd_comment[name]" value=""><br><br>
+
+Текст сообщения(<font color="red">*</font> обязательно)<br>
+
+<textarea rows="8" cols="40" name="webiadd_comment[text]"></textarea><br>
+<br>
+
+
+<img width="246" height="38" src="http://webi.ru/confirm_f.php?webi_code=1"><br>
+<input type="text" name="webiadd_comment[code_pict]" value=""><br>
+<br>
+
+<input type="hidden" name="webiadd_comment[id_tov]" value="20">
+<input type="hidden" name="webiadd_comment[clone]" value="files">
+
+<input type="submit" value="отправить">
+</form>
+
+<script type="text/javascript">
+<!--
+var aaaaa = document.getElementById("otpravka");
+aaaaa.setAttribute("action", "");//-->
+</script>
+
+
+
+</td>
+
+        </tr>
+      </table>
+    <td width="1" bgcolor="#C2DCEB"></td>
+
+
+    <td width="15%" align="left" valign="top">
+
+  <br>
+
+  <div align="center">
+
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-5836805145788828";
+/* webi.ru 160x6000 справа */
+google_ad_slot = "1306460613";
+google_ad_width = 160;
+google_ad_height = 600;
+//-->
+</script>
+<script type="text/javascript"
+        src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+
+
+
+  </div>
+
+
+
+
+
+<br>
+<br>
+
+
+
+
+<br>
+
+
+<form action="http://webi.ru/index.php?webicl=files&webimenu=in" method="POST">
+&nbsp; <input type="text" name="webivxod[login]" value=""> <br>
+&nbsp; <input type="password" name="webivxod[pass]" value=""> <br>
+&nbsp; <input type="checkbox" name="webivxod[pomni_vechno]" value="1"> запомнить<br><br>
+
+&nbsp;<input type="submit" value="войти">
+</form>
+
+
+
+
+    </td>
+	<td width="1" bgcolor="#C2DCEB"></td>
+
+
+  </tr>
+</table>
+<table width="100%" height="1" border="0" cellpadding="0" cellspacing="0" bgcolor="#C2DCEB">
+  <tr>
+    <td></td>
+  </tr>
+</table>
+
+
+<div align="center">Copyright &copy; 2003-2016 <a href="http://webi.ru" target="_blank"> WeBi Constructor</a>
+</div>
+
+
+<!--LiveInternet counter-->
+<script type="text/javascript"><!--
+document.write("<img src='//counter.yadro.ru/hit?t12.10;r" +
+    escape(document.referrer) + ((typeof(screen) == "undefined") ? "" :
+    ";s" + screen.width + "*" + screen.height + "*" + (screen.colorDepth ?
+        screen.colorDepth : screen.pixelDepth)) + ";u" + escape(document.URL) +
+    ";h" + escape(document.title.substring(0, 80)) + ";" + Math.random() +
+    "' alt='' title='LiveInternet: показано число просмотров за 24" +
+    " часа, посетителей за 24 часа и за сегодня' " +
+    "border='0' width='88' height='31'>")
+//-->
+</script>
+<!--/LiveInternet-->
+
+
+<!-- begin of Top100 code -->
+<script id="top100Counter" type="text/javascript" src="http://counter.rambler.ru/top100.jcn?1984972"></script><noscript><img src="http://counter.rambler.ru/top100.cnt?1984972" alt="" width="1" height="1" border="0" /></noscript>
+<!-- end of Top100 code -->
+
+<!-- begin of Top100 logo -->
+<img src="http://top100-images.rambler.ru/top100/banner-88x31-rambler-blue3.gif" alt="Rambler's Top100" width="88" height="31" border="0" />
+<!-- end of Top100 logo -->
+
+
+<!-- след за юзер -->
+<!-- след за юзер -->
+
+
+<!-- Yandex.Metrika counter -->
+<div style="display:none;"><script type="text/javascript">
+(function (w, c) {
+    (w[c] = w[c] || []).push(function () {
+        try {
+            w.yaCounter2939371 = new Ya.Metrika({id: 2939371, enableAll: true, ut: "noindex", webvisor: true});
+        }
+        catch (e) {
+        }
+    });
+})(window, "yandex_metrika_callbacks");
+</script></div>
+<script src="//mc.yandex.ru/metrika/watch.js" type="text/javascript" defer="defer"></script>
+<noscript><div><img src="//mc.yandex.ru/watch/2939371?ut=noindex" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+
+
+</body>
+</html>

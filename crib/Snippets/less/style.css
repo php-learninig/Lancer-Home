@@ -1,0 +1,49 @@
+html,
+body {
+    height: 100%;
+}
+
+#wraper {
+    background-color: #111;
+    margin: 0 auto;
+    height: 100%;
+}
+
+main {
+    min-height: 100%;
+    margin-bottom: -100px;
+}
+
+#all {
+    padding-bottom: 100px;
+    min-width: 1000px;
+}
+
+#topBlock {
+    background-color: #f33;
+    width: auto;
+}
+
+#leftBlock {
+    background-color: #3f3;
+    width: 300px;
+    float: left;
+}
+
+#content {
+    background-color: #ff3;
+    margin: 0 300px 0 300px;
+    min-width: 300px;
+    height: auto;
+}
+
+#rightBlock {
+    background-color: #33f;
+    width: 300px;
+    float: right;
+}
+
+footer {
+    height: 100px;
+    background-color: #678;
+}

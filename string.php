@@ -33,7 +33,7 @@ function echoThree()
  *
  */
 
-/*function bilet()
+function bilet()
 {
     return random_int(100000, 999999);
 }
@@ -52,10 +52,6 @@ function funBilet()
 //        echo 'Это не счастливый билет';
         return false;
     }
-
-
-
-    return $symbols;
 }
 
 $bilet = funBilet();
@@ -63,14 +59,14 @@ $bilet = funBilet();
 while(!$bilet)
 {
     if(!$bilet){
-        echo $bilet, ' - Билет дерьмовенький', PHP_EOL;
+        echo $bilet, ' - Билет плохой', PHP_EOL;
     }
 
     $bilet = funBilet();
 }
 
 echo "$bilet - Билет счачтливый", PHP_EOL;
-*/
+
 
 /*
  * 1. Создаем новую функцию
@@ -121,40 +117,32 @@ echo "$bilet - Билет счачтливый", PHP_EOL;
  * (int)-5 - то "Число целое отрицательное"
  * (float)-5.2 - то "Число дробное отрицательное"*/
 
-/**
- * @param int $l_int
- *
- * @return string
- */
 function chislo($l_int = false): string
 {
     if($l_int === false) {
-        return 'Вбей значения';
+        return 'Вбей значения' . PHP_EOL;
     }
 
     if(!is_int($l_int) && !is_float($l_int)) {
         switch(gettype($l_int)) {
             case 'string':
-                return 'вернуть ответ пользователю что это:
-                
-                
- * Строка';
+                return 'вернуть ответ пользователю что это: Строка' . PHP_EOL;
             break;
 
             case 'array':
-                return 'Это массив';
+                return 'Это массив' . PHP_EOL;
             break;
 
             case 'object':
-                return 'Это ОБЬЕКТ!!!!!!!!!!!!!!!';
+                return 'Это ОБЬЕКТ!!!!!!!!!!!!!!!' . PHP_EOL;
             break;
 
             case 'resourse':
-                return 'Это ресурс';
+                return 'Это ресурс' . PHP_EOL;
             break;
 
             default:
-                return 'Какая то хрень';
+                return 'Какая то хрень' . PHP_EOL;
         }
     }
 
@@ -168,12 +156,12 @@ function chislo($l_int = false): string
         return 'Число равное нулю' . PHP_EOL;
     }
     else {
-        return 'Error code';
+        return 'Error code' . PHP_EOL;
     }
 }
 
-//$int = 1;
-//chislo($int);
+$int = 1;
+echo chislo($int);
 
 function calculator($x, $y, $operator)
 {
@@ -198,45 +186,17 @@ $obj = new \SplStack();
 
 //echo chislo(NAN);*/
 
+if($x) {
+    $x = 'true';
+}
+else {
+    $x = 'false';
+}
 
-$arr = [
-    'val1',
-    'val2',
-    'val3',
-    'val4' => [
-        'key1' => 'val1'
-    ],
-    'val5',
-    'val6',
-    'val7',
-    'val8',
-];
-
-//echo count($arr);
-
-$x = false;
-$y = 0;
-
-
-
-//if($x){
-//    $x = 'true';
-//} else {
-//    $x = 'false';
-//}
-
-
+/* Тернарный оператор */
 $x = ($x)
     ? 'true'
     : 'false';
-
-
-//echo PHP_EOL, $x;
-
-
-
-
-
 
 
 $connect = mysqli_connect('localhost', 'Anna', '1234','anna.dev' );
