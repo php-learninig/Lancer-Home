@@ -1,5 +1,6 @@
 <?php
-
+echo '!!!!!!!!!!kjfdagklerugvfe';
+exit();
 include_once __DIR__ . '/../config/config.php'; //инициализация настроек
 include_once __DIR__ . '/../library/manFunctions.php';//основные функции
 
